@@ -278,22 +278,36 @@ const SignUp = () => {
       const data = await response.json();
       console.log("Server response:", data);
 
-      dispatch(
-        setCredentials({
-          user: data.user,
-          token: data.token,
-        })
-      );
-
-      navigate("/admin/dashboard");
-
       if (!response.ok) {
         throw new Error(data.message || "Signup failed");
       }
 
+      // Map role to numeric value
+      let numericRole;
+      switch (data.user.role) {
+        case "admin":
+          numericRole = 1;
+          break;
+        case "manager":
+          numericRole = 2;
+          break;
+        case "employee":
+        default:
+          numericRole = 3;
+      }
+
+      dispatch(
+        setCredentials({
+          user: { ...data.user, role: numericRole },
+          token: data.token,
+        })
+      );
+
       alert(
         `Account created successfully! Default currency: ${selectedCountry.currency}`
       );
+
+      navigate("/admin/dashboard");
 
       console.log("Signup successful:", data);
     } catch (error) {
