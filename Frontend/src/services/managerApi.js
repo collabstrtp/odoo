@@ -20,15 +20,25 @@ managerApi.interceptors.request.use((config) => {
   return config;
 });
 
-export const getPendingExpenses = async () => {
+export const getManagerExpenses = async (status) => {
   try {
-    const response = await managerApi.get("/manager");
-    console.log("Fetched pending expenses:", response.data);
+    const url = status ? `/manager?status=${status}` : "/manager";
+    const response = await managerApi.get(url);
+    console.log(
+      "Fetched manager expenses (status=",
+      status,
+      "):",
+      response.data
+    );
     return response.data;
   } catch (error) {
-    console.error("Failed to fetch pending expenses", error);
+    console.error("Failed to fetch manager expenses", error);
     throw error;
   }
+};
+
+export const getPendingExpenses = async () => {
+  return getManagerExpenses("pending");
 };
 
 export const approveExpense = async (id) => {
