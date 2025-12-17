@@ -13,6 +13,7 @@ const managerApi = axios.create({
 // Add token to requests
 managerApi.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
+  console.log("Manager API token:", token ? "present" : "missing");
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -22,6 +23,7 @@ managerApi.interceptors.request.use((config) => {
 export const getPendingExpenses = async () => {
   try {
     const response = await managerApi.get("/manager");
+    console.log("Fetched pending expenses:", response.data);
     return response.data;
   } catch (error) {
     console.error("Failed to fetch pending expenses", error);

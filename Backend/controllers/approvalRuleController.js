@@ -1,4 +1,4 @@
-import ApprovalRule from "../models/ApprovalRule.js";
+/* import ApprovalRule from "../models/ApprovalRule.js";
 
 export const getApprovalRules = async (req, res) => {
   try {
@@ -18,7 +18,7 @@ export const createApprovalRule = async (req, res) => {
       name,
       description,
       /*       categories,
-       */ approvalSequence,
+       *approvalSequence,
       minimumPercentApproval,
       specificApproverIds,
       isManagerFirst,
@@ -29,7 +29,7 @@ export const createApprovalRule = async (req, res) => {
       name,
       description,
       /*       categories,
-       */ approvalSequence,
+        approvalSequence,
       minimumPercentApproval,
       specificApproverIds,
       isManagerFirst,
@@ -49,7 +49,7 @@ export const updateApprovalRule = async (req, res) => {
       name,
       description,
       /*       categories,
-       */ approvalSequence,
+        approvalSequence,
       minimumPercentApproval,
       specificApproverIds,
       isManagerFirst,
@@ -62,7 +62,7 @@ export const updateApprovalRule = async (req, res) => {
         name,
         description,
         /*         categories,
-         */ approvalSequence,
+         approvalSequence,
         minimumPercentApproval,
         specificApproverIds,
         isManagerFirst,
@@ -81,3 +81,4 @@ export const updateApprovalRule = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+ */

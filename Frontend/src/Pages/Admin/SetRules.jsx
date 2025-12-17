@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+/* import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
@@ -216,7 +216,7 @@ const SetRules = () => {
     <div className="p-6 max-w-6xl mx-auto overflow-y-auto">
       <h2 className="text-2xl font-semibold mb-6">Approval Rules</h2>
       <div className="bg-white rounded-lg p-6">
-        {/* Form for rule creation */}
+        
         <div className="mb-6">
           <label className="block text-sm font-medium mb-2">User</label>
           <input
@@ -268,7 +268,7 @@ const SetRules = () => {
           <span>Is manager an approver?</span>
         </div>
 
-        {/* Approver sequence */}
+      
         <div className="mb-6">
           <label className="block text-sm font-medium mb-2">Approvers</label>
           <div className="space-y-2">
@@ -347,3 +347,4 @@ const SetRules = () => {
 };
 
 export default SetRules;
+ */

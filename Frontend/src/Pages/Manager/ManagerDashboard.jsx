@@ -64,7 +64,37 @@ export default function ManagerView() {
       <h1 className="text-2xl font-bold mb-6">Manager's View</h1>
 
       <div className="bg-white border-2 border-gray-800 rounded-lg p-4 overflow-y-hidden">
-        <h2 className="text-lg font-semibold mb-4">Approvals to review</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-semibold mb-4">Approvals to review</h2>
+          <div className="flex gap-2">
+            <button
+              onClick={async () => {
+                try {
+                  const data = await getPendingExpenses();
+                  console.log("Manual refresh pending:", data);
+                  setApprovals(data);
+                } catch (err) {
+                  console.error("Manual refresh failed", err);
+                }
+              }}
+              className="px-3 py-1 bg-white border rounded hover:bg-gray-50 text-sm"
+            >
+              Refresh
+            </button>
+            <button
+              onClick={() => {
+                // Toggle the debug JSON view
+                const cur = document.getElementById("mgr-debug-json");
+                if (cur)
+                  cur.style.display =
+                    cur.style.display === "none" ? "block" : "none";
+              }}
+              className="px-3 py-1 bg-white border rounded hover:bg-gray-50 text-sm"
+            >
+              Toggle JSON
+            </button>
+          </div>
+        </div>
 
         <div className="bg-blue-50 border border-blue-200 rounded p-3 mb-4">
           <p className="text-sm text-blue-800">
@@ -226,6 +256,14 @@ export default function ManagerView() {
               ))}
             </tbody>
           </table>
+        </div>
+
+        <div
+          id="mgr-debug-json"
+          style={{ display: "none" }}
+          className="mt-4 p-3 bg-gray-100 rounded text-xs overflow-auto"
+        >
+          <pre>{JSON.stringify(approvals, null, 2)}</pre>
         </div>
 
         {approvals.length === 0 && (

@@ -1,4 +1,4 @@
-import express from "express";
+/* import express from "express";
 import authMiddleware from "../middleware/authMiddleware.js";
 import {
   getApprovalRules,
@@ -15,3 +15,4 @@ router.post("/createrule", createApprovalRule);
 router.put("/updaterule/:id", updateApprovalRule);
 
 export default router;
+ */
