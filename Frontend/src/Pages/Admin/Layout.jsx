@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
-import { Menu, X, LayoutDashboard, Lock, LogOut } from "lucide-react";
+import { Menu, X, LayoutDashboard, Lock, LogOut, Send } from "lucide-react";
 import MobileSidebar from "./MobileSidebar";
 import { getProfile, logout } from "../../services/authApi";
 const menuItems = [
   { label: "Dashboard", icon: <LayoutDashboard />, path: "/admin" },
+  { label: "Approvals", icon: <Send />, path: "/admin/approvals" },
   { label: "Change Password", icon: <Lock />, path: "/admin/change-password" },
 ];
 

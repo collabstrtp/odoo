@@ -9,7 +9,7 @@ import ChangePassword from "./Pages/Auth/ChangePassword";
 // Admin Pages
 import Layout from "./Pages/Admin/Layout";
 import Dashboard from "./Pages/Admin/Dashboard";
-import SetRules from "./Pages/Admin/SetRules";
+import Approvals from "./Pages/Admin/Approvals";
 
 //manager pages
 import ManagerLayout from "./Pages/Manager/ManagerLayout";
@@ -33,7 +33,7 @@ function App() {
           <Route path="/admin" element={<Layout />}>
             <Route index element={<Dashboard />} />
             <Route path="dashboard" element={<Dashboard />} />
-            <Route path="set-rules" element={<SetRules />} />
+            <Route path="approvals" element={<Approvals />} />
             <Route path="change-password" element={<ChangePassword />} />
           </Route>
         </Route>

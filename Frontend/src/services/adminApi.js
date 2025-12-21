@@ -78,32 +78,40 @@ export async function updateCategory(categoryId, updates) {
   return res.data;
 }
 
-// Approval Rules
-export async function fetchApprovalRules() {
-  const res = await axios.get(`${BASE_URL}/approvalrules/getrule`, {
-    headers: getAuthHeader(),
-  });
+// Admin expenses (approve/reject/list)
+export async function getAdminExpenses(status) {
+  const url = status
+    ? `${BASE_URL}/expenses/admin?status=${status}`
+    : `${BASE_URL}/expenses/admin`;
+  const res = await axios.get(url, { headers: getAuthHeader() });
   return res.data;
 }
 
-export async function createApprovalRule(payload) {
-  const res = await axios.post(
-    `${BASE_URL}/approvalrules/createrule`,
-    payload,
-    {
-      headers: { "Content-Type": "application/json", ...getAuthHeader() },
-    }
+export async function updateExpenseStatus(expenseId, status) {
+  const res = await axios.patch(
+    `${BASE_URL}/expenses/${expenseId}/status`,
+    { status },
+    { headers: { "Content-Type": "application/json", ...getAuthHeader() } }
   );
   return res.data;
 }
 
-export async function updateApprovalRule(ruleId, payload) {
-  const res = await axios.put(
-    `${BASE_URL}/approvalrules/updaterule/${ruleId}`,
-    payload,
-    {
-      headers: { "Content-Type": "application/json", ...getAuthHeader() },
-    }
-  );
-  return res.data;
+// Admin action: proceed payment (finalize by admin)
+export async function approveExpense(expenseId) {
+  // alias kept for existing UI: will mark as payment_proceed
+  return updateExpenseStatus(expenseId, "payment_proceed");
+}
+
+export async function rejectExpense(expenseId) {
+  // alias kept for existing UI: will mark as declined
+  return updateExpenseStatus(expenseId, "declined");
+}
+
+// explicit helpers
+export async function paymentProceedExpense(expenseId) {
+  return updateExpenseStatus(expenseId, "payment_proceed");
+}
+
+export async function declineExpense(expenseId) {
+  return updateExpenseStatus(expenseId, "declined");
 }

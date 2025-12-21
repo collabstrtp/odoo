@@ -12,9 +12,7 @@ import userRoutes from "./routes/userRoutes.js";
 import companyRoutes from "./routes/companyRoutes.js";
 import expenseRoutes from "./routes/expenseRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
-import approvalRuleRoutes from "./routes/approvalRuleRoutes.js";
-import approvalActionRoutes from "./routes/approvalActionRoutes.js";
-import auditLogRoutes from "./routes/auditLogRoutes.js";
+/*  import approvalActionRoutes from "./routes/approvalActionRoutes.js";*/
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -36,9 +34,8 @@ app.use("/company", companyRoutes);
 app.use("/users", userRoutes);
 app.use("/expenses", expenseRoutes);
 app.use("/categories", categoryRoutes);
-app.use("/approvalrules", approvalRuleRoutes);
-app.use("/approvalactions", approvalActionRoutes);
-app.use("/auditlogs", auditLogRoutes);
+/*  app.use("/approvalactions", approvalActionRoutes); */
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {

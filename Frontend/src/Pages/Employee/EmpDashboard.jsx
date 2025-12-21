@@ -78,12 +78,16 @@ export default function EmpDashboard() {
 
   const submitExpense = async (id) => {
     try {
-      await updateExpenseStatus(id, { status: "pending" });
+      const updated = await updateExpenseStatus(id, { status: "pending" });
       setExpenses(
-        expenses.map((exp) =>
-          exp.id === id ? { ...exp, status: "pending" } : exp
-        )
+        expenses.map((exp) => (exp._id === id || exp.id === id ? updated : exp))
       );
+      if (
+        selectedExpense &&
+        (selectedExpense._id === id || selectedExpense.id === id)
+      ) {
+        setSelectedExpense(updated);
+      }
     } catch (error) {
       console.error("Failed to update expense status", error);
     }
@@ -217,7 +221,6 @@ export default function EmpDashboard() {
           <table className="w-full">
             <thead>
               <tr className="border-b-2 border-gray-800">
-                <th className="text-left p-2 font-semibold">Employee</th>
                 <th className="text-left p-2 font-semibold">Description</th>
                 <th className="text-left p-2 font-semibold">Date</th>
                 <th className="text-left p-2 font-semibold">Category</th>
@@ -234,11 +237,11 @@ export default function EmpDashboard() {
                   className="border-b border-gray-300 hover:bg-gray-50 cursor-pointer"
                   onClick={() => viewExpenseDetails(expense)}
                 >
-                  <td className="p-2">
+                  {/* <td className="p-2">
                     {expense.employee?.name ||
                       expense.employee?.email ||
                       "Unknown"}
-                  </td>
+                  </td> */}
                   <td className="p-2">{expense.description}</td>
                   <td className="p-2">{expense.date}</td>
                   <td className="p-2">
@@ -644,6 +647,32 @@ export default function EmpDashboard() {
                   </div>
                 )}
 
+              {/* Approval Sequence */}
+              {selectedExpense.approvalSequence &&
+                selectedExpense.approvalSequence.length > 0 && (
+                  <div className="mt-6 bg-white border-2 border-gray-800 rounded-lg p-4">
+                    <h3 className="font-semibold text-gray-800 mb-4">
+                      Approval Sequence
+                    </h3>
+                    <ul className="list-disc pl-5 text-sm text-gray-700">
+                      {selectedExpense.approvalSequence.map((approver, idx) => (
+                        <li
+                          key={approver._id || approver}
+                          className={
+                            idx === selectedExpense.currentApprovalStep
+                              ? "font-semibold text-yellow-700"
+                              : ""
+                          }
+                        >
+                          {approver.name || approver.email || approver}
+                          {idx === selectedExpense.currentApprovalStep &&
+                            " (current)"}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
               {selectedExpense.status !== "draft" && (
                 <div className="mt-4 text-xs text-gray-500 italic bg-blue-50 border border-blue-200 rounded p-3">
                   Once submitted the record should become readonly for employee
@@ -664,7 +693,7 @@ export default function EmpDashboard() {
               {selectedExpense.status === "draft" && (
                 <button
                   onClick={() => {
-                    submitExpense(selectedExpense.id);
+                    submitExpense(selectedExpense._id || selectedExpense.id);
                     setShowDetailModal(false);
                   }}
                   className="px-6 py-2 bg-green-600 text-white border-2 border-green-600 rounded hover:bg-green-700 font-semibold"

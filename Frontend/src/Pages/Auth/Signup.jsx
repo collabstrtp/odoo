@@ -145,9 +145,9 @@ const SignUp = () => {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-      const response = await fetch("https://restcountries.com/v2/all", {
+      /*  const response = await fetch("https://restcountries.com/v2/all", {
         signal: controller.signal,
-      });
+      }); */
 
       clearTimeout(timeoutId);
 

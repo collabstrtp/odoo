@@ -1,4 +1,4 @@
-import express from "express";
+/* import express from "express";
 import authMiddleware from "../middleware/authMiddleware.js";
 import {
   getApprovalActions,
@@ -18,3 +18,4 @@ router.post("/createapproval", createApprovalAction);
 router.put("/approve/:id", approveExpense);
 router.put("/reject/:id", rejectExpense);
 export default router;
+ */

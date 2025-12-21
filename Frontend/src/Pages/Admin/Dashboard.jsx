@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Plus, Send, X, Pencil } from "lucide-react";
+import { Plus, Send, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import {
   fetchUsers,
@@ -67,11 +67,6 @@ const Dashboard = () => {
     }
   };
 
-  const handleSetRules = (user) => {
-    // You can pass user data through state if needed
-    navigate("/admin/set-rules", { state: { user } });
-  };
-
   const handleRoleUpdate = async (userId, newRole) => {
     try {
       await updateUser(userId, { role: newRole });
@@ -118,8 +113,8 @@ const Dashboard = () => {
                 <th className="text-left p-2 font-semibold">Role</th>
                 <th className="text-left p-2 font-semibold">Manager</th>
                 <th className="text-left p-2 font-semibold">Email</th>
-                <th className="text-left p-2 font-semibold">Rules</th>
-                <th className="text-left p-2 font-semibold"></th>
+
+                <th className="text-left p-2 font-semibold">Password</th>
               </tr>
             </thead>
             <tbody>
@@ -163,15 +158,7 @@ const Dashboard = () => {
                     </select>
                   </td>
                   <td className="p-2">{user.email}</td>
-                  <td className="p-2">
-                    <button
-                      onClick={() => handleSetRules(user)}
-                      className="hover:bg-gray-100 p-1 rounded cursor-pointer"
-                      aria-label="Set rules"
-                    >
-                      <Pencil size={18} />
-                    </button>
-                  </td>
+
                   <td className="p-2">
                     <button
                       onClick={() => sendPassword(user)}

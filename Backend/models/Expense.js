@@ -23,7 +23,14 @@ const ExpenseSchema = new mongoose.Schema({
   dateIncurred: { type: Date, required: true },
   status: {
     type: String,
-    enum: ["draft", "pending", "approved", "rejected"],
+    enum: [
+      "draft",
+      "pending",
+      "approved",
+      "rejected",
+      "payment_proceed",
+      "declined",
+    ],
     default: "draft",
   },
   currentApprovalStep: { type: Number, default: 0 },

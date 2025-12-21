@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+/* import mongoose from "mongoose";
 const ApprovalActionSchema = new mongoose.Schema({
   expense: {
     type: mongoose.Schema.Types.ObjectId,
@@ -17,3 +17,4 @@ const ApprovalActionSchema = new mongoose.Schema({
 });
 
 export default mongoose.model("ApprovalAction", ApprovalActionSchema);
+ */
